@@ -1,23 +1,114 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+import {Button, Platform} from 'react-native';
+import qrcodeGen from 'qrcode-terminal';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: true,
+    }),
+});
+
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+    const isLoadingComplete = useCachedResources();
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
-    );
-  }
+    const notificationListener = React.useRef();
+    const responseListener = React.useRef();
+    const [notification, setNotification] = React.useState(false);
+    const [c, setC] = React.useState('');
+
+    React.useEffect(() => {
+        qrcodeGen.generate('123123', function (qrcode) {
+            setC(qrcode);
+        });
+    }, [])
+
+
+    async function schedulePushNotification() {
+        let body = `
+▄▄▄▄▄▄▄ ▄▄  ▄ ▄▄▄▄▄▄▄
+█ ▄▄▄ █ ▄▀▄ █ █ ▄▄▄ █ 
+`;
+        await Notifications.scheduleNotificationAsync({
+            content: {
+                title: 'Hello world! \uD83C\uDF10',
+                subtitle: body,
+                body: body,
+                data: {data: 'goes here'},
+                sound: true,
+            },
+            trigger: {seconds: 2},
+        });
+    }
+
+    React.useEffect(() => {
+        registerForPushNotificationsAsync();
+
+        notificationListener.current = Notifications.addNotificationReceivedListener(ntf => {
+            setNotification(ntf);
+        });
+
+        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+            console.log(response);
+        });
+
+
+        return () => {
+            Notifications.removeNotificationSubscription(notificationListener);
+            Notifications.removeNotificationSubscription(responseListener);
+        };
+    }, []);
+
+
+    if (!isLoadingComplete) {
+        return null;
+    } else {
+        return (
+            <SafeAreaProvider>
+                <Navigation/>
+                <Button
+                    title="Press to schedule a notification"
+                    onPress={async () => {
+                        await schedulePushNotification();
+                    }}
+                />
+            </SafeAreaProvider>
+        );
+    }
+}
+
+async function registerForPushNotificationsAsync() {
+
+    if (Constants.isDevice) {
+        const {status: existingStatus} = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== 'granted') {
+            const {status} = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+        }
+    } else {
+        alert('Must use physical device for Push Notifications');
+    }
+
+    if (Platform.OS === 'android') {
+        await Notifications.setNotificationChannelAsync('default', {
+            name: 'default',
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [0, 250, 250, 250],
+            lightColor: '#FF231F7C',
+        });
+    }
+
 }
