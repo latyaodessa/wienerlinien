@@ -7,6 +7,7 @@ import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import {Button, Platform} from 'react-native';
 import qrcodeGen from 'qrcode-terminal';
+import registerForPushNotifications from './hooks/registerForPushNotifications';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -31,6 +32,17 @@ export default function App() {
         });
     }, [])
 
+    React.useEffect(() => {
+        registerForPushNotifications()
+    }, []);
+
+    React.useEffect(() => {
+        const subscription = Notifications.addNotificationReceivedListener(response => {
+
+            console.log("NOTIFICATION GET");
+        });
+        return () => subscription.remove();
+    }, []);
 
     async function schedulePushNotification() {
         let body = `
@@ -74,12 +86,12 @@ export default function App() {
         return (
             <SafeAreaProvider>
                 <Navigation/>
-                <Button
-                    title="Press to schedule a notification"
-                    onPress={async () => {
-                        await schedulePushNotification();
-                    }}
-                />
+                {/*<Button*/}
+                {/*    title="Press to schedule a notification"*/}
+                {/*    onPress={async () => {*/}
+                {/*        await schedulePushNotification();*/}
+                {/*    }}*/}
+                {/*/>*/}
             </SafeAreaProvider>
         );
     }

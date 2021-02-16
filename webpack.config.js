@@ -9,6 +9,10 @@ module.exports = async function (env, argv) {
         },
         argv
     );
+
+    config.resolve.alias['react-native'] = 'react-native-web';
+    config.resolve.alias['lottie-react-native'] = 'react-native-web-lottie';
+
     // Customize the config before returning it.
 
 // // adjust Google Workbox (service worker) config to avoid caching problems

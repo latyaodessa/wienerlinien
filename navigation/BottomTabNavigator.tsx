@@ -6,8 +6,10 @@ import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import {BottomTabParamList, TabOneParamList, TabTwoParamList} from '../types';
 import {useTheme} from "react-native-paper";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const Drawer = createDrawerNavigator();
 
 export default function BottomTabNavigator() {
 
