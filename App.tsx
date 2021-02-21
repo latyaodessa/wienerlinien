@@ -5,9 +5,9 @@ import useCachedResources from './hooks/useCachedResources';
 import Navigation from './navigation';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
-import {Button, Platform} from 'react-native';
-import qrcodeGen from 'qrcode-terminal';
+import {Button, Platform, View} from 'react-native';
 import registerForPushNotifications from './hooks/registerForPushNotifications';
+import 'intl';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -24,41 +24,43 @@ export default function App() {
     const notificationListener = React.useRef();
     const responseListener = React.useRef();
     const [notification, setNotification] = React.useState(false);
-    const [c, setC] = React.useState('');
+    // const [c, setC] = React.useState('');
+    //
+    // React.useEffect(() => {
+    //     qrcodeGen.generate('123123', function (qrcode) {
+    //         setC(qrcode);
+    //     });
+    // }, [])
 
-    React.useEffect(() => {
-        qrcodeGen.generate('123123', function (qrcode) {
-            setC(qrcode);
-        });
-    }, [])
+    // React.useEffect(() => {
+    //     registerForPushNotifications()
+    // }, []);
 
-    React.useEffect(() => {
-        registerForPushNotifications()
-    }, []);
-
-    React.useEffect(() => {
-        const subscription = Notifications.addNotificationReceivedListener(response => {
-
-            console.log("NOTIFICATION GET");
-        });
-        return () => subscription.remove();
-    }, []);
+    // React.useEffect(() => {
+    //     const subscription = Notifications.addNotificationReceivedListener(response => {
+    //
+    //         console.log("NOTIFICATION GET");
+    //     });
+    //     return () => subscription.remove();
+    // }, []);
 
     async function schedulePushNotification() {
-        let body = `
-▄▄▄▄▄▄▄ ▄▄  ▄ ▄▄▄▄▄▄▄
-█ ▄▄▄ █ ▄▀▄ █ █ ▄▄▄ █ 
-`;
-        await Notifications.scheduleNotificationAsync({
-            content: {
-                title: 'Hello world! \uD83C\uDF10',
-                subtitle: body,
-                body: body,
-                data: {data: 'goes here'},
-                sound: true,
-            },
-            trigger: {seconds: 2},
-        });
+//         let body = `
+// ▄▄▄▄▄▄▄ ▄▄  ▄ ▄▄▄▄▄▄▄
+// █ ▄▄▄ █ ▄▀▄ █ █ ▄▄▄ █
+// `;
+//         await Notifications.scheduleNotificationAsync({
+//             content: {
+//                 title: 'Hello world! \uD83C\uDF10',
+//                 subtitle: "hello",
+//                 body: "hello",
+//                 data: {data: 'goes here'},
+//                 sound: true,
+//             },
+//             trigger: {
+//                 seconds: 2,
+//             },
+//         });
     }
 
     React.useEffect(() => {
@@ -71,6 +73,8 @@ export default function App() {
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
             console.log(response);
         });
+
+
 
 
         return () => {
@@ -86,12 +90,14 @@ export default function App() {
         return (
             <SafeAreaProvider>
                 <Navigation/>
+                {/*<View style={{padding: 100}}>*/}
                 {/*<Button*/}
                 {/*    title="Press to schedule a notification"*/}
                 {/*    onPress={async () => {*/}
                 {/*        await schedulePushNotification();*/}
                 {/*    }}*/}
                 {/*/>*/}
+                {/*</View>*/}
             </SafeAreaProvider>
         );
     }

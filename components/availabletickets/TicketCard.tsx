@@ -13,7 +13,7 @@ const TicketCard: React.FC<{ ticket: TicketType }> = ({ticket}) => {
             ticket: ticket.id,
         });
     }}>
-        <Surface style={{margin: 10, borderRadius: 15, elevation: 4, padding: 5}}>
+        <Surface style={{margin: 10, borderRadius: 15, elevation: 4, padding: 5, backgroundColor: "#E30013"}}>
             <Headline style={{color: "#FFF"}}>{ticket.title}</Headline>
             <Paragraph>{ticket.shortDesc}</Paragraph>
             <Title style={{color: "#FFF"}}>€{ticket.price}</Title>

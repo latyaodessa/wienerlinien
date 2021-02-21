@@ -1,4 +1,4 @@
-import {Picker, ScrollView, View} from "react-native";
+import {Picker, Platform, ScrollView, View} from "react-native";
 import * as React from "react";
 import {DrawerScreenProps} from "@react-navigation/drawer";
 import {ALL_TICKETS, TicketType} from "../../constants/Tickets";
@@ -18,7 +18,10 @@ import {CardIcon} from "./TicketCard";
 import LottieView from "lottie-react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import {Formik} from 'formik';
-import QRCode from 'qrcode'
+import {storeWLTicket, uuidv4, WLTicket} from "../../utils/WLAsyncStorage";
+import {useNavigation} from "@react-navigation/native";
+import usePushNotification from "../../hooks/usePushNotification";
+import * as Notifications from "expo-notifications";
 
 const BuyTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
 
@@ -26,18 +29,11 @@ const BuyTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
     const [ticketToBuy, setTicketToBuy] = React.useState<TicketType | undefined>(undefined);
     const {colors} = useTheme();
 
+
     React.useEffect(() => {
         setTicketToBuy(ALL_TICKETS.find(t => ticket === t.id));
-
-        QRCode.toDataURL('I am a pony!')
-            .then(url => {
-                console.log(url)
-            })
-            .catch(err => {
-                console.error(err)
-            })
-
     }, [ticket]);
+
 
     if (!ticketToBuy) {
         return <ActivityIndicator animating={true}/>;
@@ -56,6 +52,7 @@ const BuyTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
 
 const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
     const {colors} = useTheme();
+    const navigation = useNavigation();
 
     return (<View style={{
         zIndex: 9999,
@@ -74,6 +71,45 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
             onSubmit={(values, formikHelpers) => {
 
                 formikHelpers.setSubmitting(true);
+
+                const currentDate = new Date();
+                currentDate.setMinutes(currentDate.getMinutes() + 80);
+
+                const ticketValues: WLTicket = {
+                    id: uuidv4(),
+                    ticket: ticket,
+                    station: "test station",
+                    validFrom: new Date(),
+                    validTo: currentDate,
+
+                };
+
+                storeWLTicket(ticketValues).then(async () => {
+
+                    if (Platform.OS !== "web") {
+                        let body = `
+▄▄▄▄▄▄▄ ▄▄  ▄ ▄▄▄▄▄▄▄
+█ ▄▄▄ █ ▄▀▄ █ █ ▄▄▄ █ 
+`;
+                        // await Notifications.scheduleNotificationAsync({
+                        //     content: {
+                        //         title: 'Hello world! \uD83C\uDF10',
+                        //         subtitle: body,
+                        //         body: body,
+                        //         data: {data: 'goes here'},
+                        //         sound: true,
+                        //     },
+                        //     trigger: {seconds: 2},
+                        // });
+                    }
+
+                    formikHelpers.setSubmitting(false);
+
+                    navigation.navigate('SingleTicketScreen', {
+                        ticketId: ticketValues.id
+                    });
+
+                });
 
             }}
             // validationSchema={Yup.object().shape(validationSchema)}
@@ -109,7 +145,7 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
                         >
                             {Array(10).fill(1).map((r, index) => {
                                 const count = index + 1;
-                               return <Picker.Item key={count} label={count.toString()} value={count}/>
+                                return <Picker.Item key={count} label={count.toString()} value={count}/>
                             })}
 
 
@@ -129,6 +165,7 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
                         <Button
                             loading={isSubmitting}
                             mode="contained"
+                            onPress={handleSubmit}
                             // onPress={handleSubmit}
                         >
                             Buy Ticket
@@ -136,12 +173,11 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
                     </View>
                 )
             }}
-                </Formik>
-                </View>)
-            }
+        </Formik>
+    </View>)
+}
 
 const TicketCard: React.FC<{ ticket: TicketType }> = ({ticket}) => {
-    const {colors} = useTheme();
 
     return <Surface style={{flex: 1, margin: 0, borderRadius: 0, elevation: 4, padding: 5}}>
         <View style={{paddingBottom: 50}}>
@@ -149,17 +185,14 @@ const TicketCard: React.FC<{ ticket: TicketType }> = ({ticket}) => {
             <Subheading>{ticket.suggestion}</Subheading>
 
 
-            <LinearGradient
-                colors={['#fc3c3c', 'transparent']}
-                start={{x: 0.1, y: 0.2}}
+            <Surface
                 style={{
+                    backgroundColor: "#E30013",
                     justifyContent: "space-between",
                     flexDirection: "row",
                     alignItems: "center",
-                    // backgroundColor: "#FFF",
                     margin: 0,
                     borderWidth: 0,
-                    // borderTopLeftRadius: 15,
                     borderTopRightRadius: 50,
                     borderBottomRightRadius: 50
                 }}>
@@ -168,12 +201,10 @@ const TicketCard: React.FC<{ ticket: TicketType }> = ({ticket}) => {
                 <LottieView
                     style={{position: "relative", height: 60, width: 55}}
                     source={require('./../../assets/lottie/info.json')} autoPlay loop/>
-            </LinearGradient>
+            </Surface>
 
 
             <View style={{
-                // alignItems: "center",
-                // backgroundColor: "#FFF",
                 margin: 0,
                 borderWidth: 0,
                 borderBottomLeftRadius: 15,

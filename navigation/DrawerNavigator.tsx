@@ -6,8 +6,11 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import {Image} from "react-native";
 import AvailableTicketsScreen from '../components/availabletickets/AvailableTicketsScreen';
 import DrawerContent from './DrawerContent';
-import {FontAwesome5, MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons';
+import {FontAwesome5, MaterialIcons} from '@expo/vector-icons';
 import BuyTicketScreen from "../components/availabletickets/BuyTicketScreen";
+import SingleTicketScreen from '../components/availabletickets/SingleTicketScreen';
+import TicketsListScreen from '../components/tickets/TicketsListScreen';
+import ScheduleNotificationScreen from '../components/schedule/ScheduleNotificationScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,13 +25,31 @@ const DrawerNavigator = () => {
         >
 
             <Drawer.Screen options={{
+                drawerLabel: "Tickets Shop",
+                drawerIcon: ({focused, color, size}) => {
+                    return (<FontAwesome5 name="shopping-cart" size={size} color={color}/>)
+                },
+            }}
+                           name={"TicketsStack"}
+                           component={TicketsStack}/>
+
+            <Drawer.Screen options={{
                 drawerLabel: "Your Tickets",
                 drawerIcon: ({focused, color, size}) => {
                     return (<FontAwesome5 name="ticket-alt" size={size} color={color}/>)
                 },
             }}
-                           name={"TicketsStack"}
-                           component={TicketsStack}/>
+                           name={"UserTicketsStack"}
+                           component={UserTicketsStack}/>
+
+            <Drawer.Screen options={{
+                drawerLabel: "Schedule Notifications",
+                drawerIcon: ({focused, color, size}) => {
+                    return (<MaterialIcons name="schedule" size={size} color={color}/>)
+                },
+            }}
+                           name={"ScheduleTicketsStack"}
+                           component={ScheduleTicketsStack}/>
 
             {/*<Drawer.Screen options={{*/}
             {/*    drawerLabel: "Buy Ticket",*/}
@@ -62,6 +83,31 @@ function TicketsStack() {
         }}>
             <RootStackTicketsList.Screen name="AvailableTickets" component={AvailableTicketsScreen}/>
             <RootStackTicketsList.Screen name="BuyTicket" component={BuyTicketScreen}/>
+            <RootStackTicketsList.Screen name="SingleTicketScreen" component={SingleTicketScreen}/>
+            <RootStackTicketsList.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
+        </RootStackTicketsList.Navigator>
+    );
+}
+
+function UserTicketsStack() {
+    return (
+        <RootStackTicketsList.Navigator screenOptions={{
+            header: (props) => <CustomNavigationBar {...props} />,
+        }}>
+            <RootStackTicketsList.Screen name="TicketsListScreen" component={TicketsListScreen}/>
+            <RootStackTicketsList.Screen name="SingleTicketScreen" component={SingleTicketScreen}/>
+            <RootStackTicketsList.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
+        </RootStackTicketsList.Navigator>
+    );
+}
+
+function ScheduleTicketsStack() {
+    return (
+        <RootStackTicketsList.Navigator screenOptions={{
+            header: (props) => <CustomNavigationBar {...props} />,
+        }}>
+            <RootStackTicketsList.Screen name="ScheduleNotificationScreen" component={ScheduleNotificationScreen}/>
+            <RootStackTicketsList.Screen name="SingleTicketScreen" component={SingleTicketScreen}/>
             <RootStackTicketsList.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
         </RootStackTicketsList.Navigator>
     );
@@ -71,7 +117,7 @@ const CustomNavigationBar: React.FC<StackHeaderProps> = ({navigation, previous, 
     const {options} = scene.descriptor;
     const title = options.title;
     return (
-        <Appbar.Header focusable>
+        <Appbar.Header focusable style={{backgroundColor: "#E30013"}}>
             <IconButton
                 icon="menu"
                 // color={Colors.red500}

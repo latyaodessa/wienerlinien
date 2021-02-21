@@ -40,3 +40,25 @@ N
 navigation/DrawerNavigator.tsx,0/0/00695ea3a16fe0e8e5d049066a7a3a19760fbbf3
 L
 navigation/DrawerContent.tsx,6/2/62663d0ad6d7a3a1e44c740f815bad0273d0519a
+M
+components/EditScreenInfo.tsx,9/b/9ba04caba82da69c60aa7db85ae13f9d003188d8
+E
+constants/Tickets.tsx,2/0/209ce989bf90707e723f2af92e109f891058f688
+I
+assets/lottie/billet.json,5/f/5f26798888921c2da093b97b05f8d965351301c2
+I
+assets/lottie/header.json,b/0/b0846ec8dcc11929fc002b10175e0ae035c3ac66
+G
+assets/lottie/info.json,1/7/1755f6f17cfdb7fafe83d7bc681772fc2251152d
+I
+assets/lottie/ticket.json,b/5/b54d96d67f8e3a3f3291dda39650e239320461b1
+d
+4components/availabletickets/QuickRideTicketsList.tsx,f/1/f174e8d43934c6247617e3351c43deb5afd5ae25
+G
+assets/lottie/star.json,d/9/d92130c9e528df82d29f63f6e91875eb175510ed
+Z
+*components/availabletickets/TicketCard.tsx,1/f/1fd4d3e5a4d10460b9d0ba073c2e75df7dc1978e
+V
+&hooks/registerForPushNotifications.tsx,5/9/59e1c8fe6de7cd945a2ca4553317027995c2666a
+_
+/components/availabletickets/BuyTicketScreen.tsx,d/5/d5ee033ec220c95a31b143ba4d8cb1e05389ad4b
