@@ -34,6 +34,23 @@ const AvailableTicketsScreen = () => {
 
     return (
         <View style={{flex: 1}}>
+
+            <Surface
+
+                style={{
+                    backgroundColor: "#E30013",
+                    justifyContent: "space-between",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingLeft: 10,
+                    margin: 0,
+                    borderWidth: 0,
+                    elevation: 5
+                }}>
+
+                <Title>Active Ticket</Title>
+
+            </Surface>
             <CurrentTicket/>
             <TabView
                 renderTabBar={props => <TabBar {...props} renderIcon={({route, focused, color}) => (
@@ -55,7 +72,7 @@ const AvailableTicketsScreen = () => {
     )
 }
 
-const CurrentTicket = () => {
+export const CurrentTicket = () => {
 
     const [validTicket, setValidTicket] = React.useState<WLTicket | undefined>(undefined);
     const isFocused = useIsFocused();
@@ -79,24 +96,6 @@ const CurrentTicket = () => {
     }
 
     return (<View>
-
-
-        <Surface
-
-            style={{
-                backgroundColor: "#E30013",
-                justifyContent: "space-between",
-                flexDirection: "row",
-                alignItems: "center",
-                paddingLeft: 10,
-                margin: 0,
-                borderWidth: 0,
-                elevation: 5
-            }}>
-
-            <Title>Active Ticket</Title>
-
-        </Surface>
 
 
         <BoughtTicketCard validTicket={validTicket}/>

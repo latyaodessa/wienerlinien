@@ -4,7 +4,8 @@ export enum TicketTypeEnum {
     STUDENT,
     SCHOOL,
     SINGLE,
-    AIRPORT
+    AIRPORT,
+    LONG
 }
 
 export type TicketType = { id: string, suggestion?: string, title: string, shortDesc: string, price: string, type: TicketTypeEnum, popular?: boolean, info: Array<string> };

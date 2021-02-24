@@ -45,22 +45,22 @@ export default function App() {
     // }, []);
 
     async function schedulePushNotification() {
-//         let body = `
-// ▄▄▄▄▄▄▄ ▄▄  ▄ ▄▄▄▄▄▄▄
-// █ ▄▄▄ █ ▄▀▄ █ █ ▄▄▄ █
-// `;
-//         await Notifications.scheduleNotificationAsync({
-//             content: {
-//                 title: 'Hello world! \uD83C\uDF10',
-//                 subtitle: "hello",
-//                 body: "hello",
-//                 data: {data: 'goes here'},
-//                 sound: true,
-//             },
-//             trigger: {
-//                 seconds: 2,
-//             },
-//         });
+        let body = `
+▄▄▄▄▄▄▄ ▄▄  ▄ ▄▄▄▄▄▄▄
+█ ▄▄▄ █ ▄▀▄ █ █ ▄▄▄ █
+`;
+        await Notifications.scheduleNotificationAsync({
+            content: {
+                title: 'Hello world! \uD83C\uDF10',
+                subtitle: "hello",
+                body: "hello",
+                data: {data: 'goes here'},
+                sound: true,
+            },
+            trigger: {
+                seconds: 2,
+            },
+        });
     }
 
     React.useEffect(() => {

@@ -3,6 +3,7 @@ import {TicketType} from '../constants/Tickets';
 
 export const WL_TICKETS_STORAGE_KEY = "@wl_tickets"
 export const WL_SCHEDULER_STORAGE_KEY = "@wl_scheduler"
+export const WL_USER_STORAGE_KEY = "@wl_user"
 
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -52,6 +53,13 @@ export const storeWLTicket = async (ticket: WLTicket) => {
     }
 }
 
+export const resetTickets = async () => {
+    try {
+        await AsyncStorage.removeItem(WL_TICKETS_STORAGE_KEY);
+    } catch (e) {
+        // saving error
+    }
+}
 
 export async function getWLTickets(): Promise<Array<WLTicket>> {
     try {
@@ -82,10 +90,34 @@ export async function getScheduler(): Promise<TicketScheduler> {
     try {
         const jsonValue = await AsyncStorage.getItem(WL_SCHEDULER_STORAGE_KEY);
 
-        return jsonValue != null ? JSON.parse(jsonValue) : [];
+        return jsonValue != null ? JSON.parse(jsonValue) : undefined;
     } catch (e) {
         return {
             days: [],
         };
     }
 }
+
+export const storeSession = async (login: boolean) => {
+    try {
+        if (login) {
+            await AsyncStorage.setItem(WL_USER_STORAGE_KEY, String(login));
+        } else {
+            await AsyncStorage.removeItem(WL_USER_STORAGE_KEY);
+        }
+    } catch (e) {
+        // saving error
+    }
+}
+
+
+export async function getSession(): Promise<boolean> {
+    try {
+        const jsonValue = await AsyncStorage.getItem(WL_USER_STORAGE_KEY);
+
+        return jsonValue != null ? Boolean(jsonValue) : false;
+    } catch (e) {
+        return false;
+    }
+}
+

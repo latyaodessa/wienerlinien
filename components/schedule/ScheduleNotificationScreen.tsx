@@ -8,7 +8,7 @@ import {
     TimeType,
     WLTicket
 } from "../../utils/WLAsyncStorage";
-import {Picker, ScrollView, TouchableOpacity, View} from "react-native";
+import {Picker, Platform, ScrollView, TouchableOpacity, View} from "react-native";
 import {DrawerScreenProps} from "@react-navigation/drawer";
 import {
     ActivityIndicator,
@@ -32,6 +32,7 @@ import 'intl';
 import 'intl/locale-data/jsonp/en';
 import * as Notifications from "expo-notifications"; // or any other locale you need
 import {AlertContext} from "../../context/AlertContext";
+import {scheduleNotification} from "../../utils/WebNotificationUtil";
 
 const ScheduleNotificationScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
     const isFocused = useIsFocused();
@@ -45,49 +46,75 @@ const ScheduleNotificationScreen: React.FC<DrawerScreenProps> = ({route, navigat
         storeScheduler(sc);
     }
 
-    const addOrDeleteDay = (dayEnum: DaysOfWeek, isDelete: boolean) => {
-        let daysOfTheWeek = scheduler?.days ? scheduler.days : [];
 
-        if (isDelete) {
-            daysOfTheWeek = daysOfTheWeek.filter(f => f !== dayEnum);
-        } else {
-            daysOfTheWeek = [...daysOfTheWeek, ...[dayEnum]];
-        }
+    const addOrDeleteDay = React.useCallback((dayEnum: DaysOfWeek, isDelete: boolean) => {
+        setScheduler(s => {
+            let existing = s;
+            if (!existing) {
+                existing = {
+                    days: []
+                }
+            }
 
-        if (scheduler) {
-            let sc: TicketScheduler = {...scheduler, days: daysOfTheWeek};
-            setScheduler(sc);
+            let daysOfTheWeek = existing?.days ? existing.days : [];
+            if (isDelete) {
+                daysOfTheWeek = daysOfTheWeek.filter(f => f !== dayEnum);
+            } else {
+                daysOfTheWeek = [...daysOfTheWeek, ...[dayEnum]];
+            }
+
+            const sc: TicketScheduler = {...existing, days: daysOfTheWeek};
             saveScheduler(sc);
-        }
+            return sc;
+        })
+    }, [scheduler, setScheduler])
 
-    }
 
-    const setTime = (time: TimeType) => {
-
-        if (scheduler) {
-            let sc: TicketScheduler = {...scheduler, time: time};
-
-            setScheduler(sc);
+    const setTime = React.useCallback((time: TimeType) => {
+        setScheduler(s => {
+            let existing = s;
+            if (!existing) {
+                existing = {
+                    days: []
+                }
+            }
+            const sc: TicketScheduler = {...existing, time: time};
             saveScheduler(sc);
-        }
-    }
+            return sc;
+        })
+    }, [scheduler, setScheduler])
 
-    const setDismiss = (dismiss: number) => {
-        if (scheduler) {
-            let sc: TicketScheduler = {...scheduler, dismiss: dismiss};
-            setScheduler(sc);
+
+    const setDismiss = React.useCallback((dismiss: number) => {
+        setScheduler(s => {
+            let existing = s;
+            if (!existing) {
+                existing = {
+                    days: []
+                }
+            }
+            const sc: TicketScheduler = {...existing, dismiss: dismiss};
             saveScheduler(sc);
-        }
-    }
+            return sc;
+        })
+    }, [scheduler, setScheduler])
 
-    const setTicket = (ticketId: string) => {
-        if (scheduler) {
+
+    const setTicket = React.useCallback((ticketId: string) => {
+        setScheduler(s => {
+            let existing = s;
+            if (!existing) {
+                existing = {
+                    days: []
+                }
+            }
             const t = tickets?.find(t => t.id === ticketId);
-            let sc: TicketScheduler = {...scheduler, wlTicket: t};
-            setScheduler(sc);
+            const sc: TicketScheduler = {...existing, wlTicket: t};
             saveScheduler(sc);
-        }
-    }
+            return sc;
+        })
+    }, [scheduler, setScheduler])
+
 
     React.useEffect(() => {
         getWLTickets().then((tks) => {
@@ -111,21 +138,30 @@ const ScheduleNotificationScreen: React.FC<DrawerScreenProps> = ({route, navigat
     }
 
     const save = React.useCallback(() => {
-        Notifications.cancelAllScheduledNotificationsAsync();
 
-        console.log(scheduler?.time?.hours);
-        console.log(scheduler?.time?.minutes);
 
-        if (scheduler && scheduler.time) {
-            Notifications.scheduleNotificationAsync({
-                content: {
-                    title: 'Hello i am scheduled notification ❤️',
-                },
-                trigger: {
-                    hour: scheduler?.time?.hours,
-                    minute: scheduler?.time?.minutes
-                },
-            });
+        if (scheduler && scheduler.time && scheduler.wlTicket?.id) {
+
+            if (Platform.OS === "web") {
+                scheduleNotification(scheduler.time.hours, scheduler.time.minutes, scheduler.wlTicket.id);
+
+
+            } else {
+                Notifications.cancelAllScheduledNotificationsAsync();
+
+                Notifications.scheduleNotificationAsync({
+                    content: {
+                        title: '🕒 Your Wiener Linien Ticket',
+                        body: 'Long press on this notification will show QR code',
+                        data: {ticketId: scheduler.wlTicket?.id},
+                    },
+                    trigger: {
+                        hour: scheduler?.time?.hours,
+                        minute: scheduler?.time?.minutes,
+                        repeats: true
+                    },
+                });
+            }
 
             dispatchAlert && dispatchAlert({
                 type: 'open',
@@ -139,11 +175,12 @@ const ScheduleNotificationScreen: React.FC<DrawerScreenProps> = ({route, navigat
                 message: "Time and valid ticket are mandatory"
             });
         }
-    }, [scheduler])
+    }, [scheduler, setScheduler])
 
     if (!tickets) {
         return <ActivityIndicator/>;
     }
+
 
     return (<ScrollView style={{flex: 1}}>
 
@@ -205,6 +242,10 @@ const ScheduleNotificationScreen: React.FC<DrawerScreenProps> = ({route, navigat
                         onValueChange={setTicket}
                     >
 
+                        <Picker.Item
+                            label={`Not selected`}
+                            value={undefined}/>
+
                         {tickets.filter(t => isTicketValid(t)).map(t => {
                             return (<Picker.Item key={t.id}
                                                  label={`${t.ticket.title} (${moment(t.validTo).format('YYYY-MM-DD HH:MM')})`}
@@ -256,6 +297,7 @@ const TimePickerPage: React.FC<{ setTime: (t: TimeType) => void, time?: TimeType
         [setVisible]
     );
 
+    console.log(time);
 
     return (
         <View style={{flex: 1, paddingTop: 10}}>
@@ -276,7 +318,7 @@ const TimePickerPage: React.FC<{ setTime: (t: TimeType) => void, time?: TimeType
                 <Portal>
 
                     <Modal visible={visible} onDismiss={() => setVisible(false)}
-                           contentContainerStyle={{flex: 1, left: "50%"}}>
+                           contentContainerStyle={{flex: 1}}>
                         <TimePickerModal
                             visible={visible}
                             onDismiss={onDismiss}

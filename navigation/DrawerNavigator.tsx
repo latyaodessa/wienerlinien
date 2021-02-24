@@ -11,6 +11,7 @@ import BuyTicketScreen from "../components/availabletickets/BuyTicketScreen";
 import SingleTicketScreen from '../components/availabletickets/SingleTicketScreen';
 import TicketsListScreen from '../components/tickets/TicketsListScreen';
 import ScheduleNotificationScreen from '../components/schedule/ScheduleNotificationScreen';
+import LoginScreen from "../components/login/LoginScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,6 +25,7 @@ const DrawerNavigator = () => {
             drawerContent={(props) => <DrawerContent drawerProps={props}/>}
         >
 
+
             <Drawer.Screen options={{
                 drawerLabel: "Tickets Shop",
                 drawerIcon: ({focused, color, size}) => {
@@ -32,6 +34,15 @@ const DrawerNavigator = () => {
             }}
                            name={"TicketsStack"}
                            component={TicketsStack}/>
+
+            <Drawer.Screen options={{
+                drawerLabel: "Login",
+                drawerIcon: ({focused, color, size}) => {
+                    return (<FontAwesome5 name="user-alt" size={size} color={color}/>)
+                },
+            }}
+                           name={"Login"}
+                           component={LoginStack}/>
 
             <Drawer.Screen options={{
                 drawerLabel: "Your Tickets",
@@ -74,6 +85,18 @@ const DrawerNavigator = () => {
 }
 
 const RootStackTicketsList = createStackNavigator<any>();
+
+function LoginStack() {
+    return (
+        <RootStackTicketsList.Navigator screenOptions={{
+            header: (props) => <CustomNavigationBar {...props} />,
+        }}>
+            <RootStackTicketsList.Screen name="LoginScreen" component={LoginScreen}/>
+            <RootStackTicketsList.Screen name="SingleTicketScreen" component={SingleTicketScreen}/>
+            <RootStackTicketsList.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
+        </RootStackTicketsList.Navigator>
+    );
+}
 
 
 function TicketsStack() {

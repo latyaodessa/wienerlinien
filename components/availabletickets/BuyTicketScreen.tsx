@@ -86,25 +86,11 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
 
                 storeWLTicket(ticketValues).then(async () => {
 
-                    if (Platform.OS !== "web") {
-                        let body = `
-▄▄▄▄▄▄▄ ▄▄  ▄ ▄▄▄▄▄▄▄
-█ ▄▄▄ █ ▄▀▄ █ █ ▄▄▄ █ 
-`;
-                        // await Notifications.scheduleNotificationAsync({
-                        //     content: {
-                        //         title: 'Hello world! \uD83C\uDF10',
-                        //         subtitle: body,
-                        //         body: body,
-                        //         data: {data: 'goes here'},
-                        //         sound: true,
-                        //     },
-                        //     trigger: {seconds: 2},
-                        // });
-                    }
+
 
                     formikHelpers.setSubmitting(false);
 
+                    navigation.pop();
                     navigation.navigate('SingleTicketScreen', {
                         ticketId: ticketValues.id
                     });
