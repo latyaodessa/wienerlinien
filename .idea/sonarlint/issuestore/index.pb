@@ -6,8 +6,6 @@ R
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 ?
 babel.config.js,7/7/775bd43a34022cef87b6af825cbd551f29473f73
-K
-web-build/service-worker.js,c/4/c4bc66854abfa6e364cf809e29141ef00fbafba9
 J
 web/expo-service-worker.js,8/1/8197083a67606c62d0eaa57febbcf470306d134a
 N
@@ -27,9 +25,9 @@ Q
 J
 screens/NotFoundScreen.tsx,e/e/eecd3486b6cdf64068106bc67bffdc7bb2f28083
 D
-navigation/index.tsx,2/d/2d0bddeecb884f4d41ef922d91d6123e98379589
+navigation/index.tsx,2\d\2d0bddeecb884f4d41ef922d91d6123e98379589
 f
-6components/availabletickets/AvailableTicketsScreen.tsx,4/6/467220f2b1094fb17f9d5a4cd87eb673f140cbf8
+6components/availabletickets/AvailableTicketsScreen.tsx,4\6\467220f2b1094fb17f9d5a4cd87eb673f140cbf8
 F
 assets/lottie/bus.json,9/8/98bc1d201ec1104675b67c2e443bdb83785dd24e
 A
@@ -37,13 +35,13 @@ A
 7
 App.tsx,2/f/2f3db35b9bba122792d724b9b48a0aac92ebbb79
 N
-navigation/DrawerNavigator.tsx,0/0/00695ea3a16fe0e8e5d049066a7a3a19760fbbf3
+navigation/DrawerNavigator.tsx,0\0\00695ea3a16fe0e8e5d049066a7a3a19760fbbf3
 L
 navigation/DrawerContent.tsx,6/2/62663d0ad6d7a3a1e44c740f815bad0273d0519a
 M
 components/EditScreenInfo.tsx,9/b/9ba04caba82da69c60aa7db85ae13f9d003188d8
 E
-constants/Tickets.tsx,2/0/209ce989bf90707e723f2af92e109f891058f688
+constants/Tickets.tsx,2\0\209ce989bf90707e723f2af92e109f891058f688
 I
 assets/lottie/billet.json,5/f/5f26798888921c2da093b97b05f8d965351301c2
 I
@@ -53,7 +51,7 @@ G
 I
 assets/lottie/ticket.json,b/5/b54d96d67f8e3a3f3291dda39650e239320461b1
 d
-4components/availabletickets/QuickRideTicketsList.tsx,f/1/f174e8d43934c6247617e3351c43deb5afd5ae25
+4components/availabletickets/QuickRideTicketsList.tsx,f\1\f174e8d43934c6247617e3351c43deb5afd5ae25
 G
 assets/lottie/star.json,d/9/d92130c9e528df82d29f63f6e91875eb175510ed
 Z
@@ -61,4 +59,14 @@ Z
 V
 &hooks/registerForPushNotifications.tsx,5/9/59e1c8fe6de7cd945a2ca4553317027995c2666a
 _
-/components/availabletickets/BuyTicketScreen.tsx,d/5/d5ee033ec220c95a31b143ba4d8cb1e05389ad4b
+/components/availabletickets/BuyTicketScreen.tsx,d\5\d5ee033ec220c95a31b143ba4d8cb1e05389ad4b
+c
+3components/availabletickets/TouristsTicketsList.tsx,1\a\1a1353487720b3e24fd8d99c390a51dd25b7b7cf
+G
+components/SnackBar.tsx,9\d\9da37c30714ea28beae885399c561239dabc8764
+H
+context/AlertContext.tsx,b\f\bf1d3ce763dc93b07827e4c2b31a491272c30eb6
+b
+2components/schedule/ScheduleNotificationScreen.tsx,c\d\cd9391e46a831823de857655e3f2b3ab86fe5317
+P
+ components/login/LoginScreen.tsx,d\a\dac05c21516f649a68f523e43940266c3780e4ed

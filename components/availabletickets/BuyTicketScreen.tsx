@@ -22,6 +22,7 @@ import {storeWLTicket, uuidv4, WLTicket} from "../../utils/WLAsyncStorage";
 import {useNavigation} from "@react-navigation/native";
 import usePushNotification from "../../hooks/usePushNotification";
 import * as Notifications from "expo-notifications";
+import {AlertContext} from "../../context/AlertContext";
 
 const BuyTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
 
@@ -53,6 +54,7 @@ const BuyTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
 const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
     const {colors} = useTheme();
     const navigation = useNavigation();
+    const {dispatchAlert} = React.useContext(AlertContext);
 
     return (<View style={{
         zIndex: 9999,
@@ -73,7 +75,7 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
                 formikHelpers.setSubmitting(true);
 
                 const currentDate = new Date();
-                currentDate.setMinutes(currentDate.getMinutes() + 80);
+                currentDate.setMinutes(currentDate.getMinutes() + ticket.timeValid);
 
                 const ticketValues: WLTicket = {
                     id: uuidv4(),
@@ -89,6 +91,12 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
 
 
                     formikHelpers.setSubmitting(false);
+
+                    dispatchAlert && dispatchAlert({
+                        type: 'open',
+                        alertType: 'success',
+                        message: "Thank you for purchasing a ticket"
+                    });
 
                     navigation.pop();
                     navigation.navigate('SingleTicketScreen', {
@@ -112,40 +120,40 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
                         {/*    />*/}
                         {/*})}*/}
 
-                        <Caption>Quantity</Caption>
-                        <Picker
-                            style={{
-                                // width: 200,
-                                height: 60,
-                                backgroundColor: colors.background,
-                                borderColor: 'grey',
-                                borderWidth: 1,
-                                color: colors.text
-                            }}
-                            itemStyle={{
-                                height: 60,
-                                color: colors.text
-                            }}
-                            // selectedValue={this.state.firstLanguage}
-                            // onValueChange={(itemValue) => this.setState({firstLanguage: itemValue})}
-                        >
-                            {Array(10).fill(1).map((r, index) => {
-                                const count = index + 1;
-                                return <Picker.Item key={count} label={count.toString()} value={count}/>
-                            })}
+                        {/*<Caption>Quantity</Caption>*/}
+                        {/*<Picker*/}
+                        {/*    style={{*/}
+                        {/*        // width: 200,*/}
+                        {/*        height: 60,*/}
+                        {/*        backgroundColor: colors.background,*/}
+                        {/*        borderColor: 'grey',*/}
+                        {/*        borderWidth: 1,*/}
+                        {/*        color: colors.text*/}
+                        {/*    }}*/}
+                        {/*    itemStyle={{*/}
+                        {/*        height: 60,*/}
+                        {/*        color: colors.text*/}
+                        {/*    }}*/}
+                        {/*    // selectedValue={this.state.firstLanguage}*/}
+                        {/*    // onValueChange={(itemValue) => this.setState({firstLanguage: itemValue})}*/}
+                        {/*>*/}
+                        {/*    {Array(10).fill(1).map((r, index) => {*/}
+                        {/*        const count = index + 1;*/}
+                        {/*        return <Picker.Item key={count} label={count.toString()} value={count}/>*/}
+                        {/*    })}*/}
 
 
-                        </Picker>
+                        {/*</Picker>*/}
 
-                        <TextInput
-                            // onChangeText={handleChange(fieldId)}
-                            // onBlur={() => handleBlur(fieldId)}
-                            // mode={inputFieldC.mode === InputFieldCModeEnum.FLAT ? "flat" : "outlined"}
-                            label={"Count"}
-                            // value={value}
-                            // error={isError}
-                            keyboardType={"numeric"}
-                        />
+                        {/*<TextInput*/}
+                        {/*    // onChangeText={handleChange(fieldId)}*/}
+                        {/*    // onBlur={() => handleBlur(fieldId)}*/}
+                        {/*    // mode={inputFieldC.mode === InputFieldCModeEnum.FLAT ? "flat" : "outlined"}*/}
+                        {/*    label={"Count"}*/}
+                        {/*    // value={value}*/}
+                        {/*    // error={isError}*/}
+                        {/*    keyboardType={"numeric"}*/}
+                        {/*/>*/}
 
 
                         <Button

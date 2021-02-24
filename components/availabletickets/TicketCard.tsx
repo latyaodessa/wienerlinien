@@ -27,23 +27,14 @@ export const CardIcon: React.FC<{ type: TicketTypeEnum }> = ({type}) => {
     const size = 100;
     const color = "black";
     switch (type) {
-        case TicketTypeEnum.TIME:
-            return <MaterialCommunityIcons name="clock-outline" size={size} color={color}
-                                           style={iconStyle}/>;
         case TicketTypeEnum.VISITOR:
-            return <MaterialCommunityIcons name="clock-outline" size={size} color={color}
-                                           style={iconStyle}/>;
-        case TicketTypeEnum.STUDENT:
-            return <MaterialCommunityIcons name="clock-outline" size={size} color={color}
-                                           style={iconStyle}/>;
-        case TicketTypeEnum.SCHOOL:
-            return <MaterialCommunityIcons name="clock-outline" size={size} color={color}
+            return <MaterialCommunityIcons name="city" size={size} color={color}
                                            style={iconStyle}/>;
         case TicketTypeEnum.SINGLE:
             return <MaterialCommunityIcons name="arrow-right-bold-circle-outline" size={size} color={color}
                                            style={iconStyle}/>;
         case TicketTypeEnum.AIRPORT:
-            return <MaterialCommunityIcons name="clock-outline" size={size} color={color}
+            return <MaterialCommunityIcons name="airplane" size={size} color={color}
                                            style={iconStyle}/>;
         default:
             return <MaterialCommunityIcons name="clock-outline" size={size} color={color}

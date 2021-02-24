@@ -7,6 +7,7 @@ import QuickRideTicketsList from './QuickRideTicketsList';
 import {getWLTickets, WLTicket} from "../../utils/WLAsyncStorage";
 import {useIsFocused} from "@react-navigation/native";
 import {BoughtTicketCard} from '../tickets/TicketsListScreen';
+import TouristsTicketsList from './TouristsTicketsList';
 
 
 const SecondRoute = () => (
@@ -29,7 +30,7 @@ const AvailableTicketsScreen = () => {
 
     const renderScene = SceneMap({
         first: QuickRideTicketsList,
-        second: SecondRoute,
+        second: TouristsTicketsList,
     });
 
     return (

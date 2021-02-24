@@ -36,12 +36,12 @@ const DrawerNavigator = () => {
                            component={TicketsStack}/>
 
             <Drawer.Screen options={{
-                drawerLabel: "Login",
+                drawerLabel: "Profile",
                 drawerIcon: ({focused, color, size}) => {
                     return (<FontAwesome5 name="user-alt" size={size} color={color}/>)
                 },
             }}
-                           name={"Login"}
+                           name={"Profile"}
                            component={LoginStack}/>
 
             <Drawer.Screen options={{
