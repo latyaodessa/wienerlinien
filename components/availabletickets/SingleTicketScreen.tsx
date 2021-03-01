@@ -7,6 +7,7 @@ import moment from "moment";
 import {isTicketValid} from "../tickets/TicketsListScreen";
 import * as Notifications from "expo-notifications";
 import {sendNotificationNow} from "../../utils/WebNotificationUtil";
+import AddToWalletButton from "./AddToWalletButton";
 
 const SingleTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
 
@@ -96,11 +97,15 @@ const SingleTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) =>
             </Card>
 
 
-            <View style={{justifyContent: "space-between"}}>
+            <View style={{justifyContent: "space-between", paddingBottom: 100}}>
 
-                <Button disabled={!isValid} mode="contained" style={{marginTop: 10}} onPress={sendPushNotification}>Send Push
+                <Button disabled={!isValid} mode="contained" style={{marginTop: 10}} onPress={sendPushNotification}>Send
+                    Ticket as a
+                    Push
                     Notification</Button>
-                <Button  disabled={!isValid} mode="contained" style={{marginTop: 10}}>Add to Wallet</Button>
+                <AddToWalletButton/>
+
+
             </View>
         </View>
     </ScrollView>)

@@ -21,7 +21,7 @@ export function scheduleNotification(hours: number, minutes: number, ticketId?: 
                         url: window.location.href, // pass the current url to the notification
                         ticketId
                     },
-                    image: '/static/media/1.b9e3227d.png',
+                    image: 'https://wl.erfolg100.com/fixed/android_1.jpg',
                     vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500]
 
                 });
@@ -55,7 +55,7 @@ export function sendNotificationNow(title: string, body: string, ticketId?: stri
                         ticketId: ticketId
                     },
                     timestamp: Date.parse('01 Jan 2000 00:00:00'),
-                    image: '/static/media/wl-logo.6c7b66c8.png',
+                    image: 'https://wl.erfolg100.com/fixed/android_1.jpg',
                     vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500]
 
                 });

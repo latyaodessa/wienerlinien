@@ -27,7 +27,7 @@ J
 D
 navigation/index.tsx,2\d\2d0bddeecb884f4d41ef922d91d6123e98379589
 f
-6components/availabletickets/AvailableTicketsScreen.tsx,4\6\467220f2b1094fb17f9d5a4cd87eb673f140cbf8
+6components/availabletickets/AvailableTicketsScreen.tsx,4/6/467220f2b1094fb17f9d5a4cd87eb673f140cbf8
 F
 assets/lottie/bus.json,9/8/98bc1d201ec1104675b67c2e443bdb83785dd24e
 A
@@ -35,7 +35,7 @@ A
 7
 App.tsx,2/f/2f3db35b9bba122792d724b9b48a0aac92ebbb79
 N
-navigation/DrawerNavigator.tsx,0\0\00695ea3a16fe0e8e5d049066a7a3a19760fbbf3
+navigation/DrawerNavigator.tsx,0/0/00695ea3a16fe0e8e5d049066a7a3a19760fbbf3
 L
 navigation/DrawerContent.tsx,6/2/62663d0ad6d7a3a1e44c740f815bad0273d0519a
 M
@@ -59,7 +59,7 @@ Z
 V
 &hooks/registerForPushNotifications.tsx,5/9/59e1c8fe6de7cd945a2ca4553317027995c2666a
 _
-/components/availabletickets/BuyTicketScreen.tsx,d\5\d5ee033ec220c95a31b143ba4d8cb1e05389ad4b
+/components/availabletickets/BuyTicketScreen.tsx,d/5/d5ee033ec220c95a31b143ba4d8cb1e05389ad4b
 c
 3components/availabletickets/TouristsTicketsList.tsx,1\a\1a1353487720b3e24fd8d99c390a51dd25b7b7cf
 G
@@ -67,6 +67,20 @@ G
 H
 context/AlertContext.tsx,b\f\bf1d3ce763dc93b07827e4c2b31a491272c30eb6
 b
-2components/schedule/ScheduleNotificationScreen.tsx,c\d\cd9391e46a831823de857655e3f2b3ab86fe5317
+2components/schedule/ScheduleNotificationScreen.tsx,c/d/cd9391e46a831823de857655e3f2b3ab86fe5317
 P
- components/login/LoginScreen.tsx,d\a\dac05c21516f649a68f523e43940266c3780e4ed
+ components/login/LoginScreen.tsx,d/a/dac05c21516f649a68f523e43940266c3780e4ed
+S
+#components/layout/ScreensLayout.tsx,e/d/ed0b0ddd8e4ced27524ed92366d3d9641eafbd0a
+X
+(components/tickets/TicketsListScreen.tsx,b/5/b5c5158861b16340e8c59da83fc475a5669617e4
+H
+utils/WLAsyncStorage.tsx,4/9/493e2770f6a5a2626dadd3ca4a2e1a5dcc46b693
+e
+5components/availabletickets/AddToWalletButton.web.tsx,9/9/99b85361e6d76cda30a78b0714dbe3df4fe1e15e
+b
+2components/availabletickets/SingleTicketScreen.tsx,0/1/01b049e5c271bbedf9435bfa7261e18ad4aba4f2
+a
+1components/availabletickets/AddToWalletButton.tsx,b/a/ba444565c2664b559c9cb3247616eb6b6ae0f8e0
+M
+utils/WebNotificationUtil.tsx,5/2/52f26895b21910e3a1795d447072d13fe4d65130
