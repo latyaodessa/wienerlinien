@@ -62,23 +62,6 @@ const DrawerNavigator = () => {
                            name={"ScheduleTicketsStack"}
                            component={ScheduleTicketsStack}/>
 
-            {/*<Drawer.Screen options={{*/}
-            {/*    drawerLabel: "Buy Ticket",*/}
-            {/*    drawerIcon: ({focused, color, size}) => {*/}
-            {/*        return (<MaterialCommunityIcons name="bus-stop" size={size} color={color}/>)*/}
-            {/*    },*/}
-            {/*}}*/}
-            {/*               name={"BuyTicketsStack"}*/}
-            {/*               component={TicketsStack}/>*/}
-
-            {/*<Drawer.Screen options={{*/}
-            {/*    drawerLabel: "Schedule Notifications",*/}
-            {/*    drawerIcon: ({focused, color, size}) => {*/}
-            {/*        return (<MaterialIcons name="notifications-active" size={size} color={color}/>)*/}
-            {/*    },*/}
-            {/*}}*/}
-            {/*               name={"ScheduleNotifications"}*/}
-            {/*               component={TicketsStack}/>*/}
 
         </Drawer.Navigator>
     );

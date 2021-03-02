@@ -24,8 +24,6 @@ const TouristsTicketsList = () => {
                 backgroundColor: "#FFF",
                 margin: 0,
                 borderWidth: 0,
-                // borderBottomLeftRadius: 15,
-                // borderBottomRightRadius: 15
             }}>
                 <LottieView
                     style={{position: "relative", height: 60, width: 55}}
@@ -42,7 +40,6 @@ const TouristsTicketsList = () => {
         <View style={{
             backgroundColor: colors.background,
             top: -50,
-            // marginTop: 15,
             borderWidth: 0,
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15
@@ -50,11 +47,8 @@ const TouristsTicketsList = () => {
             <View style={{
                 flexDirection: "row",
                 alignItems: "center",
-                // backgroundColor: "#FFF",
                 margin: 0,
                 borderWidth: 0,
-                // borderBottomLeftRadius: 15,
-                // borderBottomRightRadius: 15
             }}>
                 <MaterialCommunityIcons name="city" size={40} color={colors.primary}
                                         style={{padding: 10}}/>

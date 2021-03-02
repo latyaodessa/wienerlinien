@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Snackbar} from "react-native-paper";
 import {useTheme} from "@react-navigation/native";
-import { AlertContext } from "../context/AlertContext";
+import {AlertContext} from "../context/AlertContext";
 
 const SnackBar = () => {
     const {alertState, dispatchAlert} = React.useContext(AlertContext);
@@ -47,13 +47,7 @@ const SnackBar = () => {
                     style={alertSyle}
                     visible={alertState.open}
                     onDismiss={() => closeMe()}
-                    // action={{
-                    //     label: "Undo",
-                    //     onPress: () => {
-                    //         console.log("Snackbar closed");
-                    //         // Do something
-                    //     }
-                    // }}
+
                 >
                     {alertState.message}
                 </Snackbar>

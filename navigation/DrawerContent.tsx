@@ -10,11 +10,10 @@ const DrawerContent: React.FC<{ drawerProps: React.ComponentProps<typeof DrawerI
             <DrawerContentScrollView {...drawerProps}>
 
                 <View
-                    // style={{position: 'absolute', left: 0, right: 0, bottom: 0}}
                     style={{top: -40}}
                 >
                     <LottieView
-                        style={{position: "relative"}}
+                        style={{position: "relative", height: 200}}
                         source={require('./../assets/lottie/bus.json')} autoPlay loop/>
                 </View>
                 <View
@@ -22,17 +21,8 @@ const DrawerContent: React.FC<{ drawerProps: React.ComponentProps<typeof DrawerI
                         styles.drawerContent
                     }
                 >
-                    {/*<LottieView*/}
-                    {/*    style={{position: "relative", top: -5}}*/}
-                    {/*    source={require('./../assets/lottie/header.json')} autoPlay loop/>*/}
-
                     <DrawerItemList
                         {...drawerProps}
-                        // labelStyle={drawerBar.labelStyle ? drawerBar.labelStyle as StyleProp<any> : undefined}
-                        // activeTintColor={drawerBar.activeTintColor ? drawerBar.activeTintColor : undefined}
-                        // activeBackgroundColor={drawerBar.activeBackgroundColor ? drawerBar.activeBackgroundColor : undefined}
-                        // inactiveTintColor={drawerBar.inactiveTintColor ? drawerBar.inactiveTintColor : undefined}
-                        // inactiveBackgroundColor={drawerBar.inactiveBackgroundColor ? drawerBar.inactiveBackgroundColor : undefined}
                     />
 
 

@@ -50,11 +50,8 @@ const QuickRideTicketsList = () => {
             <View style={{
                 flexDirection: "row",
                 alignItems: "center",
-                // backgroundColor: "#FFF",
                 margin: 0,
                 borderWidth: 0,
-                // borderBottomLeftRadius: 15,
-                // borderBottomRightRadius: 15
             }}>
                 <MaterialCommunityIcons name="clock-outline" size={40} color={colors.primary}
                                         style={{padding: 10}}/>

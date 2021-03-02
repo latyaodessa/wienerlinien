@@ -1,27 +1,13 @@
-import {Picker, Platform, ScrollView, View} from "react-native";
+import {ScrollView, View} from "react-native";
 import * as React from "react";
 import {DrawerScreenProps} from "@react-navigation/drawer";
 import {ALL_TICKETS, TicketType} from "../../constants/Tickets";
-import {
-    ActivityIndicator,
-    Button,
-    Caption,
-    Headline,
-    Paragraph,
-    Subheading,
-    Surface,
-    TextInput,
-    Title,
-    useTheme
-} from 'react-native-paper';
+import {ActivityIndicator, Button, Headline, Paragraph, Subheading, Surface, Title, useTheme} from 'react-native-paper';
 import {CardIcon} from "./TicketCard";
 import LottieView from "lottie-react-native";
-import {LinearGradient} from 'expo-linear-gradient';
 import {Formik} from 'formik';
 import {storeWLTicket, uuidv4, WLTicket} from "../../utils/WLAsyncStorage";
 import {useNavigation} from "@react-navigation/native";
-import usePushNotification from "../../hooks/usePushNotification";
-import * as Notifications from "expo-notifications";
 import {AlertContext} from "../../context/AlertContext";
 
 const BuyTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
@@ -41,12 +27,7 @@ const BuyTicketScreen: React.FC<DrawerScreenProps> = ({route, navigation}) => {
     }
 
     return <ScrollView style={{flex: 1, backgroundColor: colors.surface}}>
-        {/*<LinearGradient*/}
-        {/*    style={{flex: 1}}*/}
-        {/*    colors={[colors.surface, colors.background]}>*/}
         <TicketCard ticket={ticketToBuy}/>
-
-        {/*</LinearGradient>*/}
     </ScrollView>
 };
 
@@ -62,7 +43,6 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
         margin: 10,
         backgroundColor: colors.background,
         top: -50,
-        // marginTop: 15,
         borderWidth: 0,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15
@@ -89,7 +69,6 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
                 storeWLTicket(ticketValues).then(async () => {
 
 
-
                     formikHelpers.setSubmitting(false);
 
                     dispatchAlert && dispatchAlert({
@@ -106,61 +85,14 @@ const BuyTicketForm: React.FC<{ ticket: TicketType }> = ({ticket}) => {
                 });
 
             }}
-            // validationSchema={Yup.object().shape(validationSchema)}
         >
             {({handleChange, handleBlur, handleSubmit, values, isValid, isSubmitting}) => {
                 return (
                     <View style={{padding: 5}}>
-                        {/*{formC.subComponents?.map((subComponent, index) => {*/}
-                        {/*    return <ComponentSelector key={subComponent.id}*/}
-                        {/*                              component={subComponent}*/}
-                        {/*                              screenProps={screenProps}*/}
-                        {/*                              bindingValues={bindingValues}*/}
-                        {/*                              screenId={screenId}*/}
-                        {/*    />*/}
-                        {/*})}*/}
-
-                        {/*<Caption>Quantity</Caption>*/}
-                        {/*<Picker*/}
-                        {/*    style={{*/}
-                        {/*        // width: 200,*/}
-                        {/*        height: 60,*/}
-                        {/*        backgroundColor: colors.background,*/}
-                        {/*        borderColor: 'grey',*/}
-                        {/*        borderWidth: 1,*/}
-                        {/*        color: colors.text*/}
-                        {/*    }}*/}
-                        {/*    itemStyle={{*/}
-                        {/*        height: 60,*/}
-                        {/*        color: colors.text*/}
-                        {/*    }}*/}
-                        {/*    // selectedValue={this.state.firstLanguage}*/}
-                        {/*    // onValueChange={(itemValue) => this.setState({firstLanguage: itemValue})}*/}
-                        {/*>*/}
-                        {/*    {Array(10).fill(1).map((r, index) => {*/}
-                        {/*        const count = index + 1;*/}
-                        {/*        return <Picker.Item key={count} label={count.toString()} value={count}/>*/}
-                        {/*    })}*/}
-
-
-                        {/*</Picker>*/}
-
-                        {/*<TextInput*/}
-                        {/*    // onChangeText={handleChange(fieldId)}*/}
-                        {/*    // onBlur={() => handleBlur(fieldId)}*/}
-                        {/*    // mode={inputFieldC.mode === InputFieldCModeEnum.FLAT ? "flat" : "outlined"}*/}
-                        {/*    label={"Count"}*/}
-                        {/*    // value={value}*/}
-                        {/*    // error={isError}*/}
-                        {/*    keyboardType={"numeric"}*/}
-                        {/*/>*/}
-
-
                         <Button
                             loading={isSubmitting}
                             mode="contained"
                             onPress={handleSubmit}
-                            // onPress={handleSubmit}
                         >
                             Buy Ticket
                         </Button>

@@ -11,3 +11,6 @@ web-build/
 .idea/
 # macOS
 .DS_Store
+
+# Local Netlify folder
+.netlify
