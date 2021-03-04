@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Wiener Linien Tickets",
+    "description": "Wiener Linien Tickets Prototype App",
     "slug": "wienerlinien",
     "version": "1.0.3",
     "orientation": "portrait",
@@ -18,10 +19,18 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "notification": {
+      "icon": "./assets/images/icon-small.png",
+      "iosDisplayInForeground": true
+    },
     "ios": {
+      "bundleIdentifier": "com.wienerlinien.quick",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.wienerlinien.quick",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#FFFFFF"

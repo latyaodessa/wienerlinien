@@ -25,7 +25,7 @@ Q
 J
 screens/NotFoundScreen.tsx,e/e/eecd3486b6cdf64068106bc67bffdc7bb2f28083
 D
-navigation/index.tsx,2\d\2d0bddeecb884f4d41ef922d91d6123e98379589
+navigation/index.tsx,2/d/2d0bddeecb884f4d41ef922d91d6123e98379589
 f
 6components/availabletickets/AvailableTicketsScreen.tsx,4/6/467220f2b1094fb17f9d5a4cd87eb673f140cbf8
 F
@@ -41,7 +41,7 @@ L
 M
 components/EditScreenInfo.tsx,9/b/9ba04caba82da69c60aa7db85ae13f9d003188d8
 E
-constants/Tickets.tsx,2\0\209ce989bf90707e723f2af92e109f891058f688
+constants/Tickets.tsx,2/0/209ce989bf90707e723f2af92e109f891058f688
 I
 assets/lottie/billet.json,5/f/5f26798888921c2da093b97b05f8d965351301c2
 I
@@ -51,7 +51,7 @@ G
 I
 assets/lottie/ticket.json,b/5/b54d96d67f8e3a3f3291dda39650e239320461b1
 d
-4components/availabletickets/QuickRideTicketsList.tsx,f\1\f174e8d43934c6247617e3351c43deb5afd5ae25
+4components/availabletickets/QuickRideTicketsList.tsx,f/1/f174e8d43934c6247617e3351c43deb5afd5ae25
 G
 assets/lottie/star.json,d/9/d92130c9e528df82d29f63f6e91875eb175510ed
 Z
@@ -61,11 +61,11 @@ V
 _
 /components/availabletickets/BuyTicketScreen.tsx,d/5/d5ee033ec220c95a31b143ba4d8cb1e05389ad4b
 c
-3components/availabletickets/TouristsTicketsList.tsx,1\a\1a1353487720b3e24fd8d99c390a51dd25b7b7cf
+3components/availabletickets/TouristsTicketsList.tsx,1/a/1a1353487720b3e24fd8d99c390a51dd25b7b7cf
 G
-components/SnackBar.tsx,9\d\9da37c30714ea28beae885399c561239dabc8764
+components/SnackBar.tsx,9/d/9da37c30714ea28beae885399c561239dabc8764
 H
-context/AlertContext.tsx,b\f\bf1d3ce763dc93b07827e4c2b31a491272c30eb6
+context/AlertContext.tsx,b/f/bf1d3ce763dc93b07827e4c2b31a491272c30eb6
 b
 2components/schedule/ScheduleNotificationScreen.tsx,c/d/cd9391e46a831823de857655e3f2b3ab86fe5317
 P
@@ -84,3 +84,19 @@ a
 1components/availabletickets/AddToWalletButton.tsx,b/a/ba444565c2664b559c9cb3247616eb6b6ae0f8e0
 M
 utils/WebNotificationUtil.tsx,5/2/52f26895b21910e3a1795d447072d13fe4d65130
+L
+hooks/usePushNotification.ts,1/9/194d245446a6d0e80fad2b732cccdf1ee786de67
+G
+hooks/useColorScheme.ts,0/f/0fb1f6509538b264e1500e0451f62b1d51c9afdb
+K
+hooks/useCachedResources.ts,8/c/8cf4bc1421e93d2e0cc9b09f23ec862f6d3c0746
+E
+components/Themed.tsx,d/b/dbadc372a09be4c0edddec2ce58bf5b641a0a1c7
+I
+components/StyledText.tsx,d/a/da72e55165f0b270d94e638bf27bab9d63bc49ab
+C
+constants/Colors.ts,d/f/df737a18b5c0b2594e6eb6dcc3397a56f85140bb
+C
+constants/Layout.ts,9/2/92e76e83a525447d67dd0428b16dc33cbb710328
+H
+screens/TabTwoScreen.tsx,2/7/27491ade0295800b86ad6882ea013f8f5b43d030
